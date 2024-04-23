@@ -9,7 +9,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
         <title></title>
     </head>
     <body>
-        <h1>Hola mundo</h1>
+        <h1>Aplicacion Registro de Estudiante</h1>
         <h3><a href="InicioEstudiante.php">Configuracion de estudiantes</a></h3>
         <h3><a href="InicioMaterias.php">Configuracion de materias</a></h3>
     </body>

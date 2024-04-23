@@ -2,25 +2,14 @@
 // Incluir el archivo de conexión
 include 'conexion.php';
 
-// Verificar si se ha proporcionado el ID de la unidad en la URL
-if(isset($_GET['id_unidad'])) {
-    // Obtener el ID de la unidad desde la URL
-    $id_unidad = $_GET['id_unidad'];
-} else {
-    // Si no se proporcionó el ID de la unidad, redireccionar a la página anterior
-    // Puedes manejar esta redirección de acuerdo a tus necesidades
-    header("Location: index.php");
-    exit();
-}
-// Imprimir el ID de la unidad para verificar
-echo "ID de la unidad: " . $id_unidad;
 // Verificar si se ha enviado el formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verificar si se han enviado todos los datos necesarios
-    if (isset($_POST['ponderacion']) && isset($_POST['nota_trabajo'])) {
+    if (isset($_POST['ponderacion']) && isset($_POST['nota_trabajo']) && isset($_POST['id_unidad'])) {
         // Obtener los datos del formulario
         $ponderacion = $_POST['ponderacion'];
         $nota_trabajo = $_POST['nota_trabajo'];
+        $id_unidad = intval($_POST['id_unidad']); // Convertir el valor a entero
 
         try {
             // Insertar los datos en la tabla de trabajos
@@ -55,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <h2>Registrar Notas de Trabajo</h2>
 
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-    <input type="hidden" name="id_unidad" value="<?php echo $id_unidad; ?>">
+    <input type="hidden" name="id_unidad" value="<?php echo isset($_GET['id_unidad']) ? intval($_GET['id_unidad']) : ''; ?>">
     
     <label for="ponderacion">Ponderación:</label><br>
     <input type="text" id="ponderacion" name="ponderacion" required><br><br>
@@ -65,7 +54,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <input type="submit" value="Registrar Nota">
 </form>
-
 
 </body>
 </html>
